@@ -1,0 +1,6 @@
+{
+    "material-icon-theme.files.associations": {
+        "*.blade.php": "laravel",
+        "*.php": "php"
+    }
+}
