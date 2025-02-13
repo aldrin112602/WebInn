@@ -128,7 +128,7 @@
             <!-- Header Section -->
             <div class="flex items-center justify-center gap-6 mb-8">
                 <div class="w-20 h-20">
-                    <img src="{{ asset('images/philtech_logo.png') }}" alt="School Logo" class="w-full h-full object-contain">
+                    <img src="{{ asset('images/philtech-logo-transparent.webp') }}" alt="School Logo" class="w-full h-full object-contain">
                 </div>
 
                 <div class="text-center">
@@ -140,7 +140,7 @@
                 </div>
 
                 <div class="w-20 h-20">
-                    <img src="{{ asset('images/deped_logo.png') }}" alt="DepEd Logo" class="w-full h-full object-contain">
+                    <img src="{{ asset('images/deped-logo.webp') }}" alt="DepEd Logo" class="w-full h-full object-contain">
                 </div>
 
             </div>

@@ -3,14 +3,14 @@
 
 <head>
     <link rel="stylesheet" href="{{ asset('build/assets/app.css') }}">
-    <script src="{{ asset('build/assets/app.js') }}" defer></script>
+    <!-- <script src="{{ asset('build/assets/app.js') }}" defer></script> -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Admin')</title>
     @vite('resources/css/app.css')
     <style>
         body {
-            /* background-image: url("{{ asset('images/admin_auth_bg.jpg') }}") */;
+            /* background-image: url("{{ asset('images/admin-auth-bg.webp') }}") */;
             background-size: 100vw 100vh;
             background-repeat: no-repeat;
         }

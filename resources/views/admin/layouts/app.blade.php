@@ -3,7 +3,7 @@
 
 <head>
     <link rel="stylesheet" href="{{ asset('build/assets/app.css') }}">
-    <script src="{{ asset('build/assets/app.js') }}" defer></script>
+    <!-- <script src="{{ asset('build/assets/app.js') }}" defer></script> -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Create Account')</title>
@@ -11,7 +11,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="{{ asset('js/w3.js') }}"></script>
+    <script src="{{ asset('js/w3.min.js') }}"></script>
 
     @vite('resources/css/app.css')
     <link rel="stylesheet" href="{{ asset('build/assets/app.css') }}">
@@ -103,7 +103,7 @@
                     
                     <div class="flex items-center justify-start gap-1">
                         <span class="font-semibold text-gray-600">WebInn</span>
-                        <img src="{{ asset('images/philtech_logo.jpg') }}" alt="" style="height: 30px; width: 30px" />
+                        <img src="{{ asset('images/philtech-logo.webp') }}" alt="" style="height: 30px; width: 30px" />
                     </div>
                 </div>
                 <div class="p-3 {{ request()->is('admin/dashboard') ? 'bg-blue-50 text-blue-500' : 'hover:bg-blue-50 hover:text-blue-500 text-gray-700' }} rounded">

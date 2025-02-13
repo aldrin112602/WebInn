@@ -1,0 +1,1 @@
+html::-webkit-scrollbar{display:none}html{scroll-behavior:smooth}body{background-color:#f8fafc}canvas{position:absolute}.progress-container{width:100%;height:10px;background-color:#f3f3f3;border-radius:5px;overflow:hidden}.progress-bar{width:0%;height:100%;background-color:#4caf50;transition:width .2s}

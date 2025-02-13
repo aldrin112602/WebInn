@@ -3,7 +3,7 @@
 
 <head>
     <link rel="stylesheet" href="{{ asset('build/assets/app.css') }}">
-    <script src="{{ asset('build/assets/app.js') }}" defer></script>
+    <!-- <script src="{{ asset('build/assets/app.js') }}" defer></script> -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Create Account')</title>
@@ -16,7 +16,7 @@
         integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="{{ asset('js/w3.js') }}"></script>
+    <script src="{{ asset('js/w3.min.js') }}"></script>
     @yield('scripts')
 
     @vite('resources/css/app.css')
@@ -65,7 +65,7 @@
 
     </style>
 
-    <script src="{{ asset('js/w3.js') }}"></script>
+    <script src="{{ asset('js/w3.min.js') }}"></script>
 </head>
 
 <body class="bg-gray-100">
@@ -104,7 +104,7 @@
                     
                     <div class="flex items-center justify-start gap-1">
                         <span class="font-semibold text-gray-600">WebInn</span>
-                        <img class="object-cover" src="{{ asset('images/philtech_logo.jpg') }}" alt=""
+                        <img class="object-cover" src="{{ asset('images/philtech-logo.webp') }}" alt=""
                             style="height: 30px; width: 30px;" />
                     </div>
                 </div>

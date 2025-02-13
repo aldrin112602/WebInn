@@ -169,7 +169,7 @@
 
     let qrData = localStorage.getItem('qrData');
     const qrContainer = document.getElementById('qr_generate');
-    const logoUrl = "{{ asset('images/philtech_logo.png') }}";
+    const logoUrl = "{{ asset('images/philtech-logo-transparent.webp') }}";
 
     const createNewQr = () => {
         qrData = @json($data);

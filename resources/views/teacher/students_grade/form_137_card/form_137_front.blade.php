@@ -31,9 +31,9 @@
         <!-- Header Section -->
         <div class="text-center mb-4">
             <div class="flex justify-center gap-5 items-center mb-2">
-                <img src="{{ asset('images/deped_logo.png') }}" alt="Logo 1" class="h-12">
+                <img src="{{ asset('images/deped-logo.webp') }}" alt="Logo 1" class="h-12">
                 <h1 class=" font-bold">REPUBLIC OF THE PHILIPPINES<br>DEPARTMENT OF EDUCATION</h1>
-                <img src="{{ asset('images/deped_logo_2.png') }}" alt="Logo 2" class="h-12">
+                <img src="{{ asset('images/deped-logo-2.webp') }}" alt="Logo 2" class="h-12">
             </div>
             <h2 class=" font-bold uppercase">Senior High School Student Permanent Record</h2>
         </div>
