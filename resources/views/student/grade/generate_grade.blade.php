@@ -7,7 +7,7 @@
 <div class="max-w-2xl mx-auto mt-10 p-6 bg-white shadow-md rounded-md">
     <!-- Header Section -->
     <div class="text-center mb-8">
-        <img src="{{ asset('WebInn img/WebInn img/admin ark logo.jpg') }}" alt="Logo" class="mx-auto h-16 mb-4">
+        <img src="{{ asset('images/philtech-logo-transparent.webp') }}" alt="Logo" class="mx-auto h-16 mb-4">
         <h1 class="text-lg font-bold">Philippine Technological Institute of Science Arts and Trade Inc.</h1>
         <p class="text-sm">SUMMARY OF GRADES</p>
         <p class="text-sm">1st Semester, 2023-2024</p>

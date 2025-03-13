@@ -67,31 +67,9 @@
 
 @section('scripts')
 <!-- Include SweetAlert2 via CDN -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="{{ asset('js/sweetalert2@11.js') }}"></script>
 
 <script>
-    // Handle delete button click with SweetAlert2 confirmation
-    document.querySelectorAll('.delete-btn').forEach(button => {
-        button.addEventListener('click', function() {
-            const announcementId = this.getAttribute('data-id');
-            const form = document.getElementById(`delete-form-${announcementId}`);
-
-            // Trigger SweetAlert2 confirmation dialog
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // Submit the form if confirmed
-                    form.submit();
-                }
-            });
-        });
-    });
+    document.querySelectorAll(".delete-btn").forEach(t=>{t.addEventListener("click",function(){let t=this.getAttribute("data-id"),e=document.getElementById(`delete-form-${t}`);Swal.fire({title:"Are you sure?",text:"You won't be able to revert this!",icon:"warning",showCancelButton:!0,confirmButtonColor:"#3085d6",cancelButtonColor:"#d33",confirmButtonText:"Yes, delete it!"}).then(t=>{t.isConfirmed&&e.submit()})})});
 </script>
 @endsection

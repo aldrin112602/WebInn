@@ -93,8 +93,8 @@
 @endsection
 
 @section('scripts')
-<script src="{{ asset('js/qrcode.js') }}"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="{{ asset('js/qrcode.min.js') }}"></script>
+<script src="  {{ asset('js/sweetalert2@11.js') }}"></script>
 <script>
     $(document).ready(function() {
     // Function to add logo to QR code with proper error handling

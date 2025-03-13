@@ -28,7 +28,7 @@
 
     @vite('resources/css/app.css')
 
-    <!-- <link rel="manifest" href="{{ asset('manifest.json') }}"> -->
+      
 </head>
 
 <body class="antialiased text-gray-900">
@@ -291,54 +291,10 @@
     </footer>
 
     <!-- jQuery CDN -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
     <!-- Custom jQuery Script for Modal -->
     <script>
-        $(document).ready(function () {
-            // Function to open modal
-            function openModal() {
-                $('#roleModal').fadeIn(300);
-            }
-
-            // Function to close modal
-            function closeModal() {
-                $('#roleModal').fadeOut(300);
-            }
-
-            // Open modal when "Get Started" button is clicked
-            $('#getStartedBtn, #getStartedBtnFooter').on('click', function (e) {
-                e.preventDefault();
-                openModal();
-            });
-
-            // Close modal when close button is clicked
-            $('#closeModal').on('click', function () {
-                closeModal();
-            });
-
-            // Close modal when clicking outside the modal content
-            $('#roleModal').on('click', function (e) {
-                if ($(e.target).is('#roleModal')) {
-                    closeModal();
-                }
-            });
-
-            // Optional: Close modal with Esc key
-            $(document).on('keydown', function (e) {
-                if (e.key === "Escape") {
-                    closeModal();
-                }
-            });
-        });
-    </script>
-    <script>
-        // if ('serviceWorker' in navigator) {
-        //     navigator.serviceWorker.register('{{ asset("service-worker.js") }}').then(function(registration) {
-        //         console.log('Service Worker registered with scope:', registration.scope);
-        //     }).catch(function(error) {
-        //         console.log('Service Worker registration failed:', error);
-        //     });
-        // }
+        $(document).ready(function(){function o(){$("#roleModal").fadeOut(300)}$("#getStartedBtn, #getStartedBtnFooter").on("click",function(o){o.preventDefault(),$("#roleModal").fadeIn(300)}),$("#closeModal").on("click",function(){o()}),$("#roleModal").on("click",function(n){$(n.target).is("#roleModal")&&o()}),$(document).on("keydown",function(n){"Escape"===n.key&&o()})});
     </script>
 </body>
 

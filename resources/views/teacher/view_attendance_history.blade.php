@@ -3,18 +3,7 @@
 @section('title', 'Attendance History')
 @section('custom_css')
 <style>
-    @media print {
-        #tablePreview {
-            position: fixed;
-            top: 0;
-            left: 0;
-            background: white;
-            z-index: 100;
-            width: 100vw;
-            height: 100vh;
-        }
-
-    }
+    @media print{#tablePreview{position:fixed;top:0;left:0;background:#fff;z-index:100;width:100vw;height:100vh}}
 </style>
 @endsection
 @section('content')

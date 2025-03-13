@@ -18,9 +18,9 @@
 
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <!-- <link rel="manifest" href="{{ asset('manifest.json') }}"> -->
+    <script src="{{ asset('js/jquery.min.js') }}" ></script>
+    <script src="  {{ asset('js/sweetalert2@11.js') }}"></script>
+      
 </head>
 
 <body class="bg-gray-100">
@@ -47,7 +47,7 @@
                             <br>
                             <h4 class="text-md font-semibold text-gray-900">User Agreement:</h4>
                             <p class="text-sm text-gray-500">
-                                As a user of the WebInn System, you must be Admin, Teacher, Student, or Guidance of ARK Technological Inc. and agree to maintain the confidentiality of your account credentials. Your access to and use of our platform is subject to compliance with these terms and all applicable laws and regulations. You acknowledge that any violation of these terms may result in the termination of your account.
+                                As a user of the WebInn System, you must be Admin, Teacher, Student, or Guidance of Philippine Technological Institute of Science Arts and  Trade Inc. and agree to maintain the confidentiality of your account credentials. Your access to and use of our platform is subject to compliance with these terms and all applicable laws and regulations. You acknowledge that any violation of these terms may result in the termination of your account.
                             </p>
                             <br>
                             <h4 class="text-md font-semibold text-gray-900">Terms and Conditions for Logging In:</h4>
