@@ -3,10 +3,14 @@
 
 <head>
     <link rel="stylesheet" href="{{ asset('build/assets/app.css') }}">
+    <script src="{{ asset('js/scrollreveal.min.js') }}"></script>
+    <script>
+        ScrollReveal({ reset: true });
+    </script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>WebInn - Revolutionizing Education</title>
+    <title>PhilTech WebInn - Revolutionizing Education</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -28,35 +32,38 @@
 
     <!-- Author -->
     <meta name="author" content="Aldrin Caballero">
+    <link rel="icon" type="image/png" href="{{ asset('images/philtech-logo-transparent.webp') }}">
 
     @vite('resources/css/app.css')
 
     <style>
-        
-
         .custom-bg {
             background: linear-gradient(27deg, rgba(166, 7, 7, 0.7875525210084033) 1%, rgba(84, 11, 11, 1) 31%, rgba(222, 167, 167, 0.8603816526610644) 100%);
         }
+
         .bg-active-nav {
-            background-color: #450a0a !important;
+            background: rgb(240, 211, 211);
+            background: linear-gradient(27deg, rgba(240, 211, 211, 0.7875525210084033) 1%, rgba(84, 11, 11, 1) 42%, rgba(242, 91, 91, 0.8603816526610644) 100%);
+            color: white;
         }
     </style>
-
 </head>
 
 <body class="antialiased text-gray-900 transition-all">
-    <nav class="fixed top-0 left-0 w-full bg-red-800 transition-all text-white py-4 shadow-md z-50">
+    <nav
+        class="fixed hidden md:flex items-center justify-between px-5 top-0 left-0 w-full bg-red-50 transition-all text-black py-4 shadow-md z-50">
+        <img src="{{ asset('images/philtech-logo-transparent.webp') }}" alt="PhilTech Tanay Logo" width="70px">
         <ul class="flex justify-center space-x-6">
-            <li><a href="#home" class="hover:bg-red-700 px-4 py-2 rounded">Home</a></li>
-            <li><a href="#features" class="hover:bg-red-700 px-4 py-2 rounded">Key Features</a></li>
-            <li><a href="#roles" class="hover:bg-red-700 px-4 py-2 rounded">User Roles</a></li>
-            <li><a href="#about" class="hover:bg-red-700 px-4 py-2 rounded">About Us</a></li>
+            <li><a href="#home" class="hover:bg-red-700 hover:text-white px-4 py-2 rounded">Home</a></li>
+            <li><a href="#features" class="hover:bg-red-700 hover:text-white px-4 py-2 rounded">Key Features</a></li>
+            <li><a href="#roles" class="hover:bg-red-700 hover:text-white px-4 py-2 rounded">User Roles</a></li>
+            <li><a href="#about" class="hover:bg-red-700 hover:text-white px-4 py-2 rounded">About Us</a></li>
         </ul>
     </nav>
     <header id="home" class="relative text-white bg-cover bg-center"
         style="background-image: url('{{ asset('images/admin-auth-bg.webp') }}');">
         <!-- Dark Overlay -->
-        <div class="absolute inset-0 bg-red-950 opacity-60"></div>
+        <section class="absolute inset-0 bg-active-nav opacity-60"></section>
 
         <div
             class=" relative z-10 mx-auto flex flex-col items-center justify-center min-h-screen px-4 text-center space-y-6 backdrop-blur w-full">
@@ -85,9 +92,9 @@
 
 
         <!-- Modal -->
-        <div id="roleModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+        <section id="roleModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
             style="display: none;">
-            <div class="bg-white text-red-900 rounded-lg shadow-lg w-11/12 max-w-md p-6 relative">
+            <section class="bg-white text-red-900 rounded-lg shadow-lg w-11/12 max-w-md p-6 relative">
                 <!-- Close Button -->
                 <button id="closeModal" class="absolute top-3 right-3 text-red-900 hover:text-gray-500">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
@@ -98,7 +105,7 @@
                 </button>
 
                 <h2 class="text-2xl font-semibold text-center mb-6">Choose Your Role</h2>
-                <div class="space-y-4">
+                <section class="space-y-4">
                     <a href="{{ route('student.login') }}"
                         class="block bg-gradient-to-r from-red-700 to-red-500 text-white px-4 py-2 rounded hover:from-red-600 hover:to-red-400 text-center">Login
                         as Student</a>
@@ -112,9 +119,9 @@
                         class="block bg-gradient-to-r from-gray-800 to-gray-600 text-white px-4 py-2 rounded hover:from-gray-700 hover:to-gray-500 text-center">Login
                         as Admin</a>
 
-                </div>
-            </div>
-        </div>
+                </section>
+            </section>
+        </section>
 
     </header>
 
@@ -216,7 +223,7 @@
     <!-- Roles Section -->
     <section id="roles" class="py-20">
         <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-semibold text-center mb-12">User Roles</h2>
+            <h2 class="text-3xl font-semibold text-center mb-12 text-red-900">User Roles</h2>
             <div class="flex flex-wrap -mx-4">
                 <!-- Admin -->
                 <div class="w-full md:w-1/4 px-4 mb-8">
@@ -284,7 +291,7 @@
     <!-- Advanced Features Section -->
     <section id="advanced-features" class="py-20 bg-gray-100">
         <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-semibold text-center mb-12">Advanced Features</h2>
+            <h2 class="text-3xl font-semibold text-center mb-12 text-red-900">Advanced Features</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <!-- Face Recognition -->
                 <div
@@ -349,7 +356,7 @@
             <p class="text-lg mb-8">Experience a smarter way to manage education. Whether you're an admin, teacher,
                 student, or guidance counselor, WebInn has the tools you need.</p>
             <a href="#" id="getStartedBtnFooter"
-                class="bg-red-900 text-white px-6 py-3 rounded-full font-semibold hover:bg-red-700 transition">Get
+                class="bg-red-900 text-white px-6 py-3 rounded-full font-semibold hover:bg-red-700 hover:text-white transition">Get
                 Started Now</a>
         </div>
     </section>
@@ -396,6 +403,8 @@
                 this.querySelector("nav").classList.toggle("bg-active-nav", window.scrollY > 30)
             })
         });
+
+        ScrollReveal().reveal('div', { delay: 300 });
     </script>
 </body>
 
