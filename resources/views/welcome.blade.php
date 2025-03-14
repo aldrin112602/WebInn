@@ -51,7 +51,7 @@
 
 <body class="antialiased text-gray-900 transition-all">
     <nav
-        class="fixed hidden md:flex items-center justify-between px-5 top-0 left-0 w-full bg-red-50 transition-all text-black py-4 shadow-md z-50">
+        class="fixed hidden md:flex items-center justify-between px-5 top-0 left-0 w-full bg-red-50 transition-all text-black py-2 shadow-md z-50">
         <img src="{{ asset('images/philtech-logo-transparent.webp') }}" alt="PhilTech Tanay Logo" width="70px">
         <ul class="flex justify-center space-x-6">
             <li><a href="#home" class="hover:bg-red-700 hover:text-white px-4 py-2 rounded">Home</a></li>
