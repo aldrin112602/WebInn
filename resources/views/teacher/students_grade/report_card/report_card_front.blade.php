@@ -135,8 +135,6 @@
                     <h1 class="font-bold">Republic of Philippines</h1>
                     <h2 class="font-bold">DEPARTMENT OF EDUCATION</h2>
                     <p class="text-sm">Region IV-A CALABARZON</p>
-                    <p class="text-sm">Schools Division of Lucena City</p>
-                    <p class="text-sm">District II</p>
                 </div>
 
                 <div class="w-20 h-20">
@@ -189,7 +187,7 @@
             <!-- Signatures -->
             <div class="grid grid-cols-2 gap-8 mb-8">
                 <div class="text-center font-semibold">
-                    <div class="border-b border-gray-400 mb-1 font-semibold" contenteditable="true">ARTCHIE P. TRAVIÑO</div>
+                    <div class="border-b border-gray-400 mb-1 font-semibold" contenteditable="true"></div>
                     <div>School Administrator</div>
                 </div>
                 <div class="text-center font-semibold">
@@ -215,7 +213,7 @@
                 <p class="mb-4 font-semibold">Approved:</p>
                 <div class="grid grid-cols-2 gap-8 font-semibold">
                     <div class="text-center">
-                        <div class="border-b border-gray-400 mb-1" contenteditable="">ARTCHIE P. TRAVIÑO</div>
+                        <div class="border-b border-gray-400 mb-1" contenteditable=""></div>
                         <div>School Administrator</div>
                     </div>
                     <div class="text-center">

@@ -140,9 +140,9 @@
                     <a href="{{ route('teacher.login') }}"
                         class="block bg-gradient-to-r from-green-700 to-green-500 text-white px-4 py-2 rounded hover:from-green-600 hover:to-green-400 text-center">Login
                         as Teacher</a>
-                    <a href="{{ route('guidance.login') }}"
+                    {{-- <a href="{{ route('guidance.login') }}"
                         class="block bg-gradient-to-r from-yellow-700 to-yellow-500 text-white px-4 py-2 rounded hover:from-yellow-600 hover:to-yellow-400 text-center">Login
-                        as Guidance Counselor</a>
+                        as Guidance Counselor</a> --}}
                     <a href="{{ route('admin.login') }}"
                         class="block bg-gradient-to-r from-gray-800 to-gray-600 text-white px-4 py-2 rounded hover:from-gray-700 hover:to-gray-500 text-center">Login
                         as Admin</a>

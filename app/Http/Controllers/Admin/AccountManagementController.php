@@ -116,27 +116,29 @@ class AccountManagementController extends Controller
 
 
             // Apply gender filter
-            if ($request->has('gender') && $request->gender != ''  && $request->gender != 'All') {
+            if ($request->has('gender') && $request->gender != '' && $request->gender != 'All') {
                 $query->where('gender', $request->gender);
             }
 
             // Apply strand filter
-            if ($request->has('strand') && $request->strand != ''  && $request->strand != 'All') {
+            if ($request->has('strand') && $request->strand != '' && $request->strand != 'All') {
                 $query->where('strand', $request->strand);
             }
 
             // Apply grade filter
-            if ($request->has('grade') && $request->grade != ''  && $request->grade != 'All') {
+            if ($request->has('grade') && $request->grade != '' && $request->grade != 'All') {
                 $query->where('grade', $request->grade);
             }
 
             $account_list = $query->paginate(10);
 
-            return view('admin.grade.student_list', 
-            [
-                'user' => $user, 
-                'account_list' => $account_list
-            ]);
+            return view(
+                'admin.grade.student_list',
+                [
+                    'user' => $user,
+                    'account_list' => $account_list
+                ]
+            );
         }
 
         return redirect()->route('admin.login');
@@ -154,17 +156,17 @@ class AccountManagementController extends Controller
 
 
             // Apply gender filter
-            if ($request->has('gender') && $request->gender != ''  && $request->gender != 'All') {
+            if ($request->has('gender') && $request->gender != '' && $request->gender != 'All') {
                 $query->where('gender', $request->gender);
             }
 
             // Apply strand filter
-            if ($request->has('strand') && $request->strand != ''  && $request->strand != 'All') {
+            if ($request->has('strand') && $request->strand != '' && $request->strand != 'All') {
                 $query->where('strand', $request->strand);
             }
 
             // Apply grade filter
-            if ($request->has('grade') && $request->grade != ''  && $request->grade != 'All') {
+            if ($request->has('grade') && $request->grade != '' && $request->grade != 'All') {
                 $query->where('grade', $request->grade);
             }
 
@@ -184,7 +186,7 @@ class AccountManagementController extends Controller
 
 
             // Apply gender filter
-            if ($request->has('gender') && $request->gender != ''  && $request->gender != 'All') {
+            if ($request->has('gender') && $request->gender != '' && $request->gender != 'All') {
                 $query->where('gender', $request->gender);
             }
 
@@ -235,7 +237,7 @@ class AccountManagementController extends Controller
 
 
             // Apply gender filter
-            if ($request->has('gender') && $request->gender != ''  && $request->gender != 'All') {
+            if ($request->has('gender') && $request->gender != '' && $request->gender != 'All') {
                 $query->where('gender', $request->gender);
             }
 
@@ -263,20 +265,20 @@ class AccountManagementController extends Controller
 
             // Delete face images for the student
             StudentImage::where('student_id', $student->id)->delete();
-            
-            $directory = public_path('storage/face_images/'. $student->name);
+
+            $directory = public_path('storage/face_images/' . $student->name);
             if (is_dir($directory)) {
-                array_map('unlink', glob($directory. '/*'));
+                array_map('unlink', glob($directory . '/*'));
                 rmdir($directory);
             }
-            
+
 
             // Delete the student's profile photo if it exists
             if ($student->profile && file_exists(public_path($student->profile))) {
                 unlink(public_path($student->profile));
             }
 
-            
+
             $student->delete();
 
             $user = Auth::user();
@@ -315,6 +317,7 @@ class AccountManagementController extends Controller
             $user = StudentAccount::findOrFail($id);
 
 
+
             // Validate input
             $request->validate([
                 'name' => ['required', 'string', 'max:255', new ValidFullName],
@@ -330,6 +333,17 @@ class AccountManagementController extends Controller
                 'email' => 'required|email|max:255|unique:student_accounts,email,' . $user->id,
                 'id_number' => 'required|min:5|max:255|unique:student_accounts,id_number,' . $user->id,
             ]);
+
+            $oldName = $user->name;
+            $newName = $request->name;
+
+            // If the name has changed, rename the face images folder
+            $oldFaceImagesPath = public_path("storage/face_images/$oldName");
+            $newFaceImagesPath = public_path("storage/face_images/$newName");
+
+            if ($oldName !== $newName && file_exists($oldFaceImagesPath)) {
+                rename($oldFaceImagesPath, $newFaceImagesPath);
+            }
 
             // Update basic user information
             $user->update([
@@ -382,19 +396,18 @@ class AccountManagementController extends Controller
                 // Delete existing face images for the student
                 StudentImage::where('student_id', $user->id)->delete();
 
-                // Create directory for face images if it doesn't exist
-                $faceImagesPath = public_path('storage/face_images/' . $user->name);
-                if (!file_exists($faceImagesPath)) {
-                    mkdir($faceImagesPath, 0777, true);
+                // Ensure the new folder exists
+                if (!file_exists($newFaceImagesPath)) {
+                    mkdir($newFaceImagesPath, 0777, true);
                 }
 
                 foreach ($request->file('face_images') as $index => $file) {
                     $imageName = "$index.jpg";
-                    $file->move($faceImagesPath, $imageName);
+                    $file->move($newFaceImagesPath, $imageName);
 
                     StudentImage::create([
                         'student_id' => $user->id,
-                        'image_path' => 'face_images/' . $user->name . '/' . $imageName,
+                        'image_path' => "face_images/$newName/$imageName",
                     ]);
                 }
             }
@@ -804,7 +817,7 @@ class AccountManagementController extends Controller
 
             return redirect()->route('admin.admin_list')->with('success', 'Admin updated successfully');
         }
-        
+
 
         return redirect()->route('admin.login');
     }

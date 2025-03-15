@@ -87,6 +87,7 @@ class StudentController extends Controller
         if (Auth::guard('teacher')->check()) {
             $user = StudentAccount::findOrFail($id);
 
+
             // Validate input
             $request->validate([
                 'name' => ['required', 'string', 'max:255', new ValidFullName],
@@ -102,6 +103,18 @@ class StudentController extends Controller
                 'email' => 'required|email|max:255|unique:student_accounts,email,' . $user->id,
                 'id_number' => 'required|min:5|max:255|unique:student_accounts,id_number,' . $user->id,
             ]);
+
+            $oldName = $user->name;
+            $newName = $request->name;
+
+
+            // If the name has changed, rename the face images folder
+            $oldFaceImagesPath = public_path("storage/face_images/$oldName");
+            $newFaceImagesPath = public_path("storage/face_images/$newName");
+
+            if ($oldName !== $newName && file_exists($oldFaceImagesPath)) {
+                rename($oldFaceImagesPath, $newFaceImagesPath);
+            }
 
             // Update basic user information
             $user->update([
@@ -154,22 +167,21 @@ class StudentController extends Controller
                 // Delete existing face images for the student
                 StudentImage::where('student_id', $user->id)->delete();
 
-                // Create directory for face images if it doesn't exist
-                $faceImagesPath = public_path('storage/face_images/' . $user->name);
-                if (!file_exists($faceImagesPath)) {
-                    mkdir($faceImagesPath, 0777, true);
+                // Ensure the new folder exists
+                if (!file_exists($newFaceImagesPath)) {
+                    mkdir($newFaceImagesPath, 0777, true);
                 }
 
                 foreach ($request->file('face_images') as $index => $file) {
                     $imageName = "$index.jpg";
-                    $file->move($faceImagesPath, $imageName);
+                    $file->move($newFaceImagesPath, $imageName);
 
                     StudentImage::create([
                         'student_id' => $user->id,
-                        'image_path' => 'face_images/' . $user->name . '/' . $imageName,
+                        'image_path' => "face_images/$newName/$imageName",
                     ]);
                 }
-            }
+            }   
 
             $user->save();
 
@@ -207,20 +219,20 @@ class StudentController extends Controller
 
             // Delete face images for the student
             StudentImage::where('student_id', $student->id)->delete();
-            
-            $directory = public_path('storage/face_images/'. $student->name);
+
+            $directory = public_path('storage/face_images/' . $student->name);
             if (is_dir($directory)) {
-                array_map('unlink', glob($directory. '/*'));
+                array_map('unlink', glob($directory . '/*'));
                 rmdir($directory);
             }
-            
+
 
             // Delete the student's profile photo if it exists
             if ($student->profile && file_exists(public_path($student->profile))) {
                 unlink(public_path($student->profile));
             }
 
-            
+
 
             $user = Auth::user();
             History::create(
