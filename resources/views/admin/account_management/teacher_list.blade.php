@@ -26,22 +26,22 @@
                         <option value="Teacher 3" {{ request()->get('position') == 'Teacher 3' ? 'selected' : '' }}>Teacher 3</option>
                         <option value="All" {{ request()->get('position') == "All" ? "selected" : "" }}>All</option>
                     </select>
-                    <select name="grade_handle" class="py-2 border rounded-md" onchange="document.getElementById('filterForm').submit();">
-                        <option value="" disabled selected hidden>Grade handle</option>
-                        <optgroup label="G11">
-                            <option value="11 ABM" {{ request()->get('grade_handle') == "11 ABM" ? "selected" : "" }}>ABM</option>
-                            <option value="11 ICT" {{ request()->get('grade_handle') == "11 ICT" ? "selected" : "" }}>ICT</option>
-                            <option value="11 HUMSS" {{ request()->get('grade_handle') == "11 HUMSS" ? "selected" : "" }}>HUMSS</option>
-                            <option value="11 HE" {{ request()->get('grade_handle') == "11 HE" ? "selected" : "" }}>HE</option>
-                        </optgroup>
-                        <optgroup label="G12">
-                            <option value="12 ABM" {{ request()->get('grade_handle') == "12 ABM" ? "selected" : "" }}>ABM</option>
-                            <option value="12 ICT" {{ request()->get('grade_handle') == "12 ICT" ? "selected" : "" }}>ICT</option>
-                            <option value="12 HUMSS" {{ request()->get('grade_handle') == "12 HUMSS" ? "selected" : "" }}>HUMSS</option>
-                            <option value="12 HE" {{ request()->get('grade_handle') == "12 HE" ? "selected" : "" }}>HE</option>
-                        </optgroup>
-                        <option value="All" {{ request()->get('grade_handle') == "All" ? "selected" : "" }}>All</option>
-                    </select>
+                        {{-- <select name="grade_handle" class="py-2 border rounded-md" onchange="document.getElementById('filterForm').submit();">
+                            <option value="" disabled selected hidden>Grade handle</option>
+                            <optgroup label="G11">
+                                <option value="11 ABM" {{ request()->get('grade_handle') == "11 ABM" ? "selected" : "" }}>ABM</option>
+                                <option value="11 ICT" {{ request()->get('grade_handle') == "11 ICT" ? "selected" : "" }}>ICT</option>
+                                <option value="11 HUMSS" {{ request()->get('grade_handle') == "11 HUMSS" ? "selected" : "" }}>HUMSS</option>
+                                <option value="11 HE" {{ request()->get('grade_handle') == "11 HE" ? "selected" : "" }}>HE</option>
+                            </optgroup>
+                            <optgroup label="G12">
+                                <option value="12 ABM" {{ request()->get('grade_handle') == "12 ABM" ? "selected" : "" }}>ABM</option>
+                                <option value="12 ICT" {{ request()->get('grade_handle') == "12 ICT" ? "selected" : "" }}>ICT</option>
+                                <option value="12 HUMSS" {{ request()->get('grade_handle') == "12 HUMSS" ? "selected" : "" }}>HUMSS</option>
+                                <option value="12 HE" {{ request()->get('grade_handle') == "12 HE" ? "selected" : "" }}>HE</option>
+                            </optgroup>
+                            <option value="All" {{ request()->get('grade_handle') == "All" ? "selected" : "" }}>All</option>
+                        </select> --}}
                 </form>
             </div>
             <a href="{{ route('admin.create.teacher') }}" class="px-4 py-2 bg-blue-500 text-white rounded-md flex items-center justify-center gap-3"><i class="fas fa-plus"></i> Add Teacher</a>

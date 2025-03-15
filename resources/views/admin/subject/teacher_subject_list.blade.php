@@ -17,7 +17,7 @@
             </div>
             <div class="flex gap-2">
             
-            <a href="{{ route('admin.teacher.create.subject', ['teacher_id' => request()->query('teacher_id'), 'grade_handle_id' => request()->query('grade_handle_id')]) }}" class="px-4 py-2 bg-blue-500 text-white rounded-md flex items-center justify-center gap-3"><i class="fas fa-plus"></i> Add Subject</a>
+            <a href="{{ route('admin.teacher.create.subject', ['teacher_id' => $grade_handle->teacher_id, 'grade_handle_id' => $grade_handle->id]) }}" class="px-4 py-2 bg-blue-500 text-white rounded-md flex items-center justify-center gap-3"><i class="fas fa-plus"></i> Add Subject</a>
             </div>
         </div>
 

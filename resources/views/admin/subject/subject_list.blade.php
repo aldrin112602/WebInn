@@ -15,7 +15,7 @@
                     </div>
                 </form>
             </div>
-            <!-- <a href="{{ route('admin.create.subject') }}" class="px-4 py-2 bg-blue-500 text-white rounded-md flex items-center justify-center gap-3"><i class="fas fa-plus"></i> Add Subject</a> -->
+            {{-- <a href="{{ route('admin.create.subject') }}" class="px-4 py-2 bg-blue-500 text-white rounded-md flex items-center justify-center gap-3"><i class="fas fa-plus"></i> Add Subject</a>  --}}
         </div>
 
         <hr class="my-3">

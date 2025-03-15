@@ -45,21 +45,49 @@
             background: rgb(240, 211, 211);
             background: linear-gradient(27deg, rgba(240, 211, 211, 0.7875525210084033) 1%, rgba(84, 11, 11, 1) 42%, rgba(242, 91, 91, 0.8603816526610644) 100%);
             color: white;
+            transition: all .8s;
         }
     </style>
 </head>
 
 <body class="antialiased text-gray-900 transition-all">
-    <nav
-        class="fixed hidden md:flex items-center justify-between px-5 top-0 left-0 w-full bg-red-50 transition-all text-black py-2 shadow-md z-50">
-        <img src="{{ asset('images/philtech-logo-transparent.webp') }}" alt="PhilTech Tanay Logo" width="70px">
-        <ul class="flex justify-center space-x-6">
-            <li><a href="#home" class="hover:bg-red-700 hover:text-white px-4 py-2 rounded">Home</a></li>
-            <li><a href="#features" class="hover:bg-red-700 hover:text-white px-4 py-2 rounded">Key Features</a></li>
-            <li><a href="#roles" class="hover:bg-red-700 hover:text-white px-4 py-2 rounded">User Roles</a></li>
-            <li><a href="#about" class="hover:bg-red-700 hover:text-white px-4 py-2 rounded">About Us</a></li>
+    <nav class="fixed top-0 left-0 w-full bg-red-50 transition-all text-black py-2 shadow-md z-50">
+        <section class="flex items-center justify-between px-5">
+            <img src="{{ asset('images/philtech-logo-transparent.webp') }}" alt="PhilTech Tanay Logo" width="70px">
+            
+            <!-- Hamburger Button -->
+            <button id="menu-toggle" class="md:hidden focus:outline-none">
+                <svg class="w-8 h-8 text-red-900" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+            
+            <!-- Desktop Navigation -->
+            <ul class="hidden md:flex justify-center space-x-6">
+                <li><a href="#home" class="hover:bg-red-700 hover:text-white px-4 py-2 rounded">Home</a></li>
+                <li><a href="#features" class="hover:bg-red-700 hover:text-white px-4 py-2 rounded">Key Features</a></li>
+                <li><a href="#roles" class="hover:bg-red-700 hover:text-white px-4 py-2 rounded">User Roles</a></li>
+                <li><a target="_blank" href="{{ route('face.recognition') }}" class="hover:bg-red-700 hover:text-white px-4 py-2 rounded">Face Recognition</a></li>
+                <li><a href="#about" class="hover:bg-red-700 hover:text-white px-4 py-2 rounded">About Us</a></li>
+            </ul>
+        </section>
+        
+        <!-- Mobile Navigation -->
+        <ul id="mobile-menu" class="hidden flex flex-col items-center bg-red-50 md:hidden py-4 space-y-4 shadow-md">
+            <li><a href="#home" class="block px-4 py-2 text-black hover:bg-red-700 hover:text-white">Home</a></li>
+            <li><a href="#features" class="block px-4 py-2 text-black hover:bg-red-700 hover:text-white">Key Features</a></li>
+            <li><a href="#roles" class="block px-4 py-2 text-black hover:bg-red-700 hover:text-white">User Roles</a></li>
+            <li><a target="_blank" href="{{ route('face.recognition') }}" class="block px-4 py-2 text-black hover:bg-red-700 hover:text-white">Face Recognition</a></li>
+            <li><a href="#about" class="block px-4 py-2 text-black hover:bg-red-700 hover:text-white">About Us</a></li>
         </ul>
     </nav>
+    
+    <script>
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+    </script>
+    
     <header id="home" class="relative text-white bg-cover bg-center"
         style="background-image: url('{{ asset('images/admin-auth-bg.webp') }}');">
         <!-- Dark Overlay -->
@@ -387,7 +415,7 @@
         </div>
         <div class="mt-4 text-center text-sm text-gray-400">
             <p>&copy; {{ date('Y') }} WebInn. All rights reserved.</p>
-            <p>Developed by <strong>Aldrin Caballero</strong></p>
+            {{-- <p>Developed by <strong>Aldrin Caballero</strong></p> --}}
         </div>
     </footer>
 

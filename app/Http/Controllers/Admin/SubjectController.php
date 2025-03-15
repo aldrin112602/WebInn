@@ -22,6 +22,8 @@ class SubjectController extends Controller
             // dd($grade_handle);
 
             $subject_list = SubjectModel::where('teacher_id', request()->query('teacher_id'))->where('grade_handle_id', request()->query('grade_handle_id'))->paginate(10);
+
+            // dd($subject_list);
             
 
             return view('admin.subject.teacher_subject_list', [
@@ -29,7 +31,8 @@ class SubjectController extends Controller
                 'TeacherAccount' => TeacherAccount::class,
                 'grade_handle' => $grade_handle,
                 'subject_list' => $subject_list,
-                'id' => request()->query('teacher_id')
+                'id' => request()->query('teacher_id'),
+                'teacher_id' => request()->query('teacher_id'),
             ]);
         }
 
@@ -183,6 +186,8 @@ class SubjectController extends Controller
             'time_start' => 'required',
             'time_end' => 'required',
         ]);
+
+        // dd($request->all());
 
         $time_start_12hr = $this->convertTo12HourFormat($request->time_start);
         $time_end_12hr = $this->convertTo12HourFormat($request->time_end);
