@@ -10,28 +10,51 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>PhilTech WebInn - Revolutionizing Education</title>
-
+    <!-- Meta Title -->
+    <title>WebInn | Smart Education with Face Recognition & QR Attendance</title>
+    
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
-
+    
+    <!-- Search Engine Optimization by Aldrin Caballero -->
+    <!-- Profile Link (XFN - Social Relationships) -->
+    <link rel="profile" href="https://gmpg.org/xfn/11">
 
     <!-- Meta Description -->
     <meta name="description"
-        content="WebInn is transforming education with innovative features like face recognition attendance, QR code-based attendance, email notifications, and an Excel-like grading sheet. Tailored for 4 user levels: Admin, Guidance, Student, and Teacher.">
+        content="WebInn is revolutionizing education with Face Recognition & QR Code Attendance, Email Notifications, and an Excel-like Grading System for Admins, Teachers, Students, and Guidance Counselors.">
 
-    <!-- Meta Keywords -->
+    <!-- Robots Meta Tag -->
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://aquamarine-fish-440283.hostingersite.com/">
+
+    <!-- Meta Keywords (Less Important for SEO, but Helpful) -->
     <meta name="keywords"
-        content="WebInn, myWebInn, MyWebInn, Education Technology, Face Recognition Attendance, QR Code Attendance, Email Notifications, Grading Sheet, Admin Portal, Guidance Portal, Teacher Portal, Student Portal, Revolutionizing Education">
-
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+        content="WebInn, Education Technology, Face Recognition Attendance, QR Code Attendance, School Management System, Smart Grading, Student Portal, Teacher Portal, Admin Portal">
 
     <!-- Author -->
     <meta name="author" content="Aldrin Caballero">
+
+    <!-- Open Graph Meta Tags (for Facebook, LinkedIn) -->
+    <meta property="og:title" content="WebInn | Smart Education with Face Recognition & QR Attendance">
+    <meta property="og:description"
+        content="WebInn is revolutionizing education with Face Recognition & QR Code Attendance, Email Notifications, and an Excel-like Grading System.">
+    <meta property="og:image" content="{{ asset('images/philtech-logo-transparent.webp') }}">
+    <meta property="og:url" content="https://aquamarine-fish-440283.hostingersite.com/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="WebInn">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="WebInn | Smart Education with Face Recognition & QR Attendance">
+    <meta name="twitter:description"
+        content="WebInn is transforming education with advanced technology like Face Recognition & QR Code Attendance.">
+    <meta name="twitter:image" content="{{ asset('images/philtech-logo-transparent.webp') }}">
+
     <link rel="icon" type="image/png" href="{{ asset('images/philtech-logo-transparent.webp') }}">
 
     @vite('resources/css/app.css')
@@ -54,40 +77,46 @@
     <nav class="fixed top-0 left-0 w-full bg-red-50 transition-all text-black py-2 shadow-md z-50">
         <section class="flex items-center justify-between px-5">
             <img src="{{ asset('images/philtech-logo-transparent.webp') }}" alt="PhilTech Tanay Logo" width="70px">
-            
+
             <!-- Hamburger Button -->
             <button id="menu-toggle" class="md:hidden focus:outline-none">
-                <svg class="w-8 h-8 text-red-900" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <svg class="w-8 h-8 text-red-900" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
                 </svg>
             </button>
-            
+
             <!-- Desktop Navigation -->
             <ul class="hidden md:flex justify-center space-x-6">
                 <li><a href="#home" class="hover:bg-red-700 hover:text-white px-4 py-2 rounded">Home</a></li>
-                <li><a href="#features" class="hover:bg-red-700 hover:text-white px-4 py-2 rounded">Key Features</a></li>
+                <li><a href="#features" class="hover:bg-red-700 hover:text-white px-4 py-2 rounded">Key Features</a>
+                </li>
                 <li><a href="#roles" class="hover:bg-red-700 hover:text-white px-4 py-2 rounded">User Roles</a></li>
-                <li><a target="_blank" href="{{ route('face.recognition') }}" class="hover:bg-red-700 hover:text-white px-4 py-2 rounded">Face Recognition</a></li>
+                <li><a target="_blank" href="{{ route('face.recognition') }}"
+                        class="hover:bg-red-700 hover:text-white px-4 py-2 rounded">Face Recognition</a></li>
                 <li><a href="#about" class="hover:bg-red-700 hover:text-white px-4 py-2 rounded">About Us</a></li>
             </ul>
         </section>
-        
+
         <!-- Mobile Navigation -->
         <ul id="mobile-menu" class="hidden flex flex-col items-center bg-red-50 md:hidden py-4 space-y-4 shadow-md">
             <li><a href="#home" class="block px-4 py-2 text-black hover:bg-red-700 hover:text-white">Home</a></li>
-            <li><a href="#features" class="block px-4 py-2 text-black hover:bg-red-700 hover:text-white">Key Features</a></li>
-            <li><a href="#roles" class="block px-4 py-2 text-black hover:bg-red-700 hover:text-white">User Roles</a></li>
-            <li><a target="_blank" href="{{ route('face.recognition') }}" class="block px-4 py-2 text-black hover:bg-red-700 hover:text-white">Face Recognition</a></li>
+            <li><a href="#features" class="block px-4 py-2 text-black hover:bg-red-700 hover:text-white">Key
+                    Features</a></li>
+            <li><a href="#roles" class="block px-4 py-2 text-black hover:bg-red-700 hover:text-white">User Roles</a>
+            </li>
+            <li><a target="_blank" href="{{ route('face.recognition') }}"
+                    class="block px-4 py-2 text-black hover:bg-red-700 hover:text-white">Face Recognition</a></li>
             <li><a href="#about" class="block px-4 py-2 text-black hover:bg-red-700 hover:text-white">About Us</a></li>
         </ul>
     </nav>
-    
+
     <script>
-        document.getElementById('menu-toggle').addEventListener('click', function() {
+        document.getElementById('menu-toggle').addEventListener('click', function () {
             document.getElementById('mobile-menu').classList.toggle('hidden');
         });
     </script>
-    
+
     <header id="home" class="relative text-white bg-cover bg-center"
         style="background-image: url('{{ asset('images/admin-auth-bg.webp') }}');">
         <!-- Dark Overlay -->

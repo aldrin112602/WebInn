@@ -12,6 +12,45 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="  {{ asset('js/sweetalert2@11.js') }}"></script>
+    <!-- Search Engine Optimization by Aldrin Caballero -->
+    <!-- Profile Link (XFN - Social Relationships) -->
+    <link rel="profile" href="https://gmpg.org/xfn/11">
+
+    <!-- Meta Description -->
+    <meta name="description"
+        content="WebInn is revolutionizing education with Face Recognition & QR Code Attendance, Email Notifications, and an Excel-like Grading System for Admins, Teachers, Students, and Guidance Counselors.">
+
+    <!-- Robots Meta Tag -->
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://aquamarine-fish-440283.hostingersite.com/">
+
+    <!-- Meta Keywords (Less Important for SEO, but Helpful) -->
+    <meta name="keywords"
+        content="WebInn, Education Technology, Face Recognition Attendance, QR Code Attendance, School Management System, Smart Grading, Student Portal, Teacher Portal, Admin Portal">
+
+    <!-- Author -->
+    <meta name="author" content="Aldrin Caballero">
+
+    <!-- Open Graph Meta Tags (for Facebook, LinkedIn) -->
+    <meta property="og:title" content="WebInn | Smart Education with Face Recognition & QR Attendance">
+    <meta property="og:description"
+        content="WebInn is revolutionizing education with Face Recognition & QR Code Attendance, Email Notifications, and an Excel-like Grading System.">
+    <meta property="og:image" content="{{ asset('images/philtech-logo-transparent.webp') }}">
+    <meta property="og:url" content="https://aquamarine-fish-440283.hostingersite.com/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="WebInn">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="WebInn | Smart Education with Face Recognition & QR Attendance">
+    <meta name="twitter:description"
+        content="WebInn is transforming education with advanced technology like Face Recognition & QR Code Attendance.">
+    <meta name="twitter:image" content="{{ asset('images/philtech-logo-transparent.webp') }}">
+
+    <link rel="icon" type="image/png" href="{{ asset('images/philtech-logo-transparent.webp') }}">
 
 </head>
 
