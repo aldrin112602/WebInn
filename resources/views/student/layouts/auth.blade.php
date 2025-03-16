@@ -2,6 +2,8 @@
 <html lang="en">
 
 <head>
+    <meta name="google-site-verification" content="tU_6Yfck8dwvd94C-xcOivOWlkmvLrw3SELDsWyvA_g">
+
     <link rel="stylesheet" href="{{ asset('build/assets/app.css') }}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

@@ -2,6 +2,8 @@
 <html lang="en">
 
 <head>
+    <meta name="google-site-verification" content="tU_6Yfck8dwvd94C-xcOivOWlkmvLrw3SELDsWyvA_g">
+
     <link rel="stylesheet" href="{{ asset('build/assets/app.css') }}">
     <!-- <script src="{{ asset('build/assets/app.js') }}" defer></script> -->
     <meta charset="UTF-8">
