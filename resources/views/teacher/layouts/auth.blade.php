@@ -12,7 +12,7 @@
 
     <!-- Meta Description -->
     <meta name="description"
-        content="WebInn is revolutionizing education with Face Recognition & QR Code Attendance, Email Notifications, and an Excel-like Grading System for Admins, Teachers, Students, and Guidance Counselors.">
+        content="WebInn is revolutionizing education with Face Recognition & QR Code Attendance, Email Notifications, and Grading System for Admins, Teachers, Students, and Guidance Counselors.">
 
     <!-- Robots Meta Tag -->
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
@@ -30,19 +30,28 @@
     <!-- Open Graph Meta Tags (for Facebook, LinkedIn) -->
     <meta property="og:title" content="WebInn | Smart Education with Face Recognition & QR Attendance">
     <meta property="og:description"
-        content="WebInn is revolutionizing education with Face Recognition & QR Code Attendance, Email Notifications, and an Excel-like Grading System.">
+        content="WebInn is revolutionizing education with Face Recognition & QR Code Attendance, Email Notifications, and Grading System.">
     <meta property="og:image" content="{{ asset('images/philtech-logo-transparent.webp') }}">
     <meta property="og:url" content="https://aquamarine-fish-440283.hostingersite.com/">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="WebInn">
     <meta property="og:locale" content="en_US">
 
-    <!-- Twitter Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="WebInn | Smart Education with Face Recognition & QR Attendance">
-    <meta name="twitter:description"
-        content="WebInn is transforming education with advanced technology like Face Recognition & QR Code Attendance.">
-    <meta name="twitter:image" content="{{ asset('images/philtech-logo-transparent.webp') }}">
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "name": "WebInn",
+          "url": "https://aquamarine-fish-440283.hostingersite.com/",
+          "logo": "{{ asset('images/philtech-logo-transparent.webp') }}",
+          "description": "WebInn is revolutionizing education with Face Recognition & QR Code Attendance, Email Notifications, and Grading System.",
+          "sameAs": [
+            "https://web.facebook.com/aldrinDev02",
+            "https://github.com/aldrin112602",
+            "https://www.linkedin.com/in/aldrin02"
+          ]
+        }
+        </script>
 
     <link rel="icon" type="image/png" href="{{ asset('images/philtech-logo-transparent.webp') }}">
     @vite('resources/css/app.css')
