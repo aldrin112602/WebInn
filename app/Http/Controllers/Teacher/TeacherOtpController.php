@@ -24,7 +24,7 @@ class TeacherOtpController extends Controller
         $user = TeacherAccount::where('email', $request->email)->first();
         if ($user) {
             $otp = $this->getRandomNumbers();
-            $expiresAt = Carbon::now()->addMinutes(10);
+            $expiresAt = Carbon::now()->addMinutes(10); // valid for 10 minutes
 
             $sent = $this->mailerService->sendOtp($request->email, $otp);
 
@@ -38,11 +38,12 @@ class TeacherOtpController extends Controller
                 // Store email in session
                 Session::put('otp_email', $request->email);
                 Session::put('otp', $otp);
+                Session::put('expires_at', $expiresAt);
 
-                return redirect()->route('teacher.verify-form.otp')->with('success', 'OTP sent successfully!');
+                return redirect()->route('teacher.verify-form.otp', ['expires_at' => Session::get('expires_at')])->with('success', 'OTP sent successfully!');
             }
 
-            return back()->withErrors(['email' => 'Failed to send OTP, please try again']);
+            return back()->withErrors(['email' => 'Failed to send OTP, please check your internet connection']);
         } else {
             return back()->withErrors(['email' => 'User not found, please try again']);
         }
@@ -75,11 +76,29 @@ class TeacherOtpController extends Controller
             ->with('success', 'OTP verified successfully!');
     }
 
-    public function request()
+    private function clearSession()
     {
-        // Clear session
         Session::forget('otp_email');
         Session::forget('otp');
+        Session::forget('expires_at');
+    }
+
+    public function request()
+    {
+
+
+
+
+        if (!empty(Session::get('expires_at'))) {
+            // check first if the OTP is expired
+            if (Carbon::now() > Session::get('expires_at')) {
+                $this->clearSession();
+            } else {
+                return redirect()->route('teacher.verify-form.otp', ['expires_at' => Session::get('expires_at')]);
+            }
+        } else {
+            $this->clearSession();
+        }
 
         return view('teacher.auth.email');
     }
@@ -88,7 +107,9 @@ class TeacherOtpController extends Controller
     {
         $email = Session::get('otp_email');
         if (!$email) {
-            return back()->withErrors(['otp' => 'Email not found in session']);
+            $this->clearSession();
+            return redirect()->route('teacher.login')->withErrors(['message' => 'Email not found in session']);
+            // return back()->withErrors(['otp' => 'Email not found in session']);
         }
 
         return view('teacher.auth.verify-otp');

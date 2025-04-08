@@ -52,7 +52,7 @@
                     class="form-checkbox rounded focus:border-red-400 outline-none">
                 <label for="remember" class="ml-2 text-red-900 text-sm">Remember Me</label>
             </div>
-            <a href="{{ route('student.password.request') }}"
+            <a href="{{ route('teacher.password.request') }}"
                 class="text-sm text-red-700 hover:underline font-semibold">Forgot Password?</a>
         </div>
 
