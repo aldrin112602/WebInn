@@ -2,9 +2,21 @@
 @section('title', 'Verify OTP')
 
 @section('content')
-<form action="{{ route('admin.2fa.verify') }}" method="post" class="w-full max-w-md bg-white rounded-lg p-8 mx-auto mt-10 shadow-lg" style="box-shadow: 0 0 0 100vw rgba(0, 0, 0, 0.6);">
+<form action="{{ route('admin.2fa.verify') }}" method="post" class="w-full max-w-md bg-white  rounded-lg p-8 relative shadow" style="overflow: hidden;">
+
+    <div class="py-1 w-full absolute bg-gradient-to-r from-red-900 via-rose-800 to-red-400" style="top: 0; left: 0;">
+    </div>
+    <div class="flex items-center justify-between gap-2">
+        <img class="w-20" src="{{ asset('images/philtech-logo-transparent.webp') }}" alt="Logo">
+        <div class="text-center">
+            <h1 class="text-red-900 font-bold">PhilTech Tanay, Inc.</h1>
+            <h3 class="text-red-900 font-bold text-sm">Department of Education</h3>
+        </div>
+        <img class="w-20" src="{{ asset('images/deped-logo.webp') }}" alt="Logo">
+
+    </div>
     @csrf
-    <h2 class="text-2xl font-bold mb-6 text-gray-600">Verify Your OTP Code</h2>
+    <h2 class="text-2xl font-bold mb-6 text-red-900 mt-5">Verify Your OTP Code</h2>
     <p class="mb-4 text-gray-500 text-sm">Please enter the 6-digit code sent to your email to complete the verification.</p>
 
     <!-- Add countdown timer display -->
@@ -17,12 +29,12 @@
         <label for="otp" class="block text-gray-700 font-medium">OTP Code</label>
         <div id="otp-container" class="flex justify-between">
             <!-- Six input fields for the OTP -->
-            <input autofocus type="text" maxlength="1" class="otp-box form-input w-12 h-12 text-center rounded-lg border-gray-300 focus:ring-2 focus:ring-blue-500 @error('otp') border-red-500 @enderror">
-            <input type="text" maxlength="1" class="otp-box form-input w-12 h-12 text-center rounded-lg border-gray-300 focus:ring-2 focus:ring-blue-500 @error('otp') border-red-500 @enderror">
-            <input type="text" maxlength="1" class="otp-box form-input w-12 h-12 text-center rounded-lg border-gray-300 focus:ring-2 focus:ring-blue-500 @error('otp') border-red-500 @enderror">
-            <input type="text" maxlength="1" class="otp-box form-input w-12 h-12 text-center rounded-lg border-gray-300 focus:ring-2 focus:ring-blue-500 @error('otp') border-red-500 @enderror">
-            <input type="text" maxlength="1" class="otp-box form-input w-12 h-12 text-center rounded-lg border-gray-300 focus:ring-2 focus:ring-blue-500 @error('otp') border-red-500 @enderror">
-            <input type="text" maxlength="1" class="otp-box form-input w-12 h-12 text-center rounded-lg border-gray-300 focus:ring-2 focus:ring-blue-500 @error('otp') border-red-500 @enderror">
+            <input autofocus type="text" maxlength="1" class="otp-box form-input w-12 h-12 text-center rounded-lg focus:ring-2 focus:ring-rose-900 @error('otp') border-red-500 @enderror">
+            <input type="text" maxlength="1" class="otp-box form-input w-12 h-12 text-center rounded-lg focus:ring-2 focus:ring-rose-900 @error('otp') border-red-500 @enderror">
+            <input type="text" maxlength="1" class="otp-box form-input w-12 h-12 text-center rounded-lg focus:ring-2 focus:ring-rose-900 @error('otp') border-red-500 @enderror">
+            <input type="text" maxlength="1" class="otp-box form-input w-12 h-12 text-center rounded-lg focus:ring-2 focus:ring-rose-900 @error('otp') border-red-500 @enderror">
+            <input type="text" maxlength="1" class="otp-box form-input w-12 h-12 text-center rounded-lg focus:ring-2 focus:ring-rose-900 @error('otp') border-red-500 @enderror">
+            <input type="text" maxlength="1" class="otp-box form-input w-12 h-12 text-center rounded-lg focus:ring-2 focus:ring-rose-900 @error('otp') border-red-500 @enderror">
         </div>
 
         @error('otp')
@@ -36,11 +48,11 @@
                 const otpInputs = document.querySelectorAll(".otp-box");
                 const hiddenOtpInput = document.getElementById("otp");
 
-                // Function to update the hidden input with the joined OTP
+            
                 const updateHiddenOtpValue = () => {
                     const otpValue = Array.from(otpInputs)
                         .map(input => input.value)
-                        .join(""); // Join all values into a single string
+                        .join(""); 
                     hiddenOtpInput.value = otpValue;
                 };
 
@@ -51,19 +63,19 @@
                         const prev = otpInputs[index - 1];
 
                         if (current.value.length === 1 && next) {
-                            next.focus(); // Focus the next box if filled
+                            next.focus();
                         } else if (e.inputType === "deleteContentBackward" && prev) {
-                            prev.focus(); // Focus the previous box if deleted
+                            prev.focus(); 
                         }
 
-                        updateHiddenOtpValue(); // Update the hidden input on each change
+                        updateHiddenOtpValue(); 
                     });
 
                     input.addEventListener("keydown", (e) => {
                         if (e.key === "Backspace" && input.value === "") {
                             const prev = otpInputs[index - 1];
                             if (prev) {
-                                prev.focus(); // Focus the previous box on backspace
+                                prev.focus(); 
                             }
                         }
                     });
@@ -73,7 +85,7 @@
     </div>
 
     <div>
-        <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-lg font-semibold hover:bg-blue-700 transition duration-200">Verify OTP</button>
+        <button type="submit" class="w-full bg-rose-900 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition duration-200">Verify OTP</button>
         <p class="text-center mt-4 text-sm text-gray-500">Didn't receive the code? <a href="{{ route('admin.2fa.resend') }}" id="resendLink" class="text-blue-600 hover:underline" style="pointer-events: none; opacity: 0.5;">Resend Code</a></p>
     </div>
 </form>
@@ -101,8 +113,8 @@
                 countdownElement.classList.add('text-red-600');
                 resendLink.style.pointerEvents = 'auto';
                 resendLink.style.opacity = '1';
-                expiredMessage.classList.remove('hidden'); // Show the expired message
-                clearInterval(interval); // Stop the countdown
+                expiredMessage.classList.remove('hidden');
+                clearInterval(interval);
                 return;
             }
 

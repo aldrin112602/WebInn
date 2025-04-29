@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Artisan;
 require_once __DIR__ . '/root/admin.php';
 require_once __DIR__ . '/root/teacher.php';
 require_once __DIR__ . '/root/student.php';
-require_once __DIR__ . '/root/guidance.php';
+// require_once __DIR__ . '/root/guidance.php';
 require_once __DIR__ . '/root/public.php';
 
 Route::get('/clear-cache', function () {

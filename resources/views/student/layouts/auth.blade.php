@@ -130,19 +130,32 @@
 
 
         <script>
-            $(document).ready(function () {
-                $('#termsTrigger').on('click', function (event) {
+            $(document).ready(function() {
+                const hasAgreedToTerms = localStorage.getItem('termsAgreed') === 'true';
+
+                if (hasAgreedToTerms) {
+                    $('#agreeTerms').prop('checked', true);
+                    $('#loginButton').removeClass('btn-disabled').addClass('btn-enabled').removeAttr('disabled');
+                }
+
+                $('#termsTrigger').on('click', function(event) {
                     event.preventDefault();
                     $('#termsModal').removeClass('hidden');
                 });
-                $('#closeModal').on('click', function () {
+
+                $('#closeModal').on('click', function() {
                     $('#termsModal').addClass('hidden');
                 });
-                $('#agreeTerms').on('change', function () {
+
+                $('#agreeTerms').on('change', function() {
                     if ($(this).is(':checked')) {
-                        $('#loginButton').removeClass('btn-disabled').addClass('btn-enabled').removeAttr('disabled');
+                        localStorage.setItem('termsAgreed', 'true');
+                        $('#loginButton').removeClass('btn-disabled').addClass('btn-enabled').removeAttr(
+                            'disabled');
                     } else {
-                        $('#loginButton').removeClass('btn-enabled').addClass('btn-disabled').attr('disabled', 'disabled');
+                        localStorage.removeItem('termsAgreed');
+                        $('#loginButton').removeClass('btn-enabled').addClass('btn-disabled').attr('disabled',
+                            'disabled');
                     }
                 });
 
@@ -151,7 +164,7 @@
     </main>
     @if (session('success'))
         <script>
-            document.addEventListener('DOMContentLoaded', function () {
+            document.addEventListener('DOMContentLoaded', function() {
                 const Toast = Swal.mixin({
                     toast: true,
                     position: "top-end",
@@ -175,7 +188,7 @@
 
     @if (session('error'))
         <script>
-            document.addEventListener('DOMContentLoaded', function () {
+            document.addEventListener('DOMContentLoaded', function() {
                 const Toast = Swal.mixin({
                     toast: true,
                     position: "top-end",
@@ -200,7 +213,7 @@
     <script>
         try {
             $(document).ready(() => {
-                $('.toggle-password').on('click', function () {
+                $('.toggle-password').on('click', function() {
                     const passwordInput = $($(this).attr('toggle'));
                     const isPassword = passwordInput.attr('type') === 'password';
                     passwordInput.attr('type', isPassword ? 'text' : 'password');
