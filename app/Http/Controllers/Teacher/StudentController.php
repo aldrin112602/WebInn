@@ -1,23 +1,16 @@
 <?php
 
 namespace App\Http\Controllers\Teacher;
-
+use App\Notifications\PasswordUpdatedNotification;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Rules\ValidFullName;
-use Illuminate\Support\Facades\{Auth, Storage};
+use Illuminate\Support\Facades\{Auth};
 use App\Models\{TeacherGradeHandle, Student\StudentAccount, StudentImage, History};
-use App\Services\PHPMailerService;
 
 class StudentController extends Controller
 {
-
-    protected $mailerService;
-
-    public function __construct(PHPMailerService $mailerService)
-    {
-        $this->mailerService = $mailerService;
-    }
+ 
     // return the list of all students
     public function index(Request $request)
     {
@@ -196,10 +189,10 @@ class StudentController extends Controller
 
 
             if (isset($request->new_password)) {
-                $sent = $this->mailerService->sendUpdatedPassword($user->email, $request->new_password, $user->username, $user->name, 'student');
-
-                if (!$sent) {
-                    return redirect()->back()->with('error', 'Failed to send account credentials via email.');
+                try {
+                    $user->notify(new PasswordUpdatedNotification($request->new_password, $user->username, $user->name, 'student'));
+                } catch (\Exception $e) {
+                    return redirect()->back()->with('error', "Failed to send notification: " . $e->getMessage());
                 }
             }
 

@@ -16,18 +16,10 @@ use App\Models\{
     TeacherGradeHandle
 };
 
-use App\Services\PHPMailerService;
+use App\Notifications\AccountCreatedNotification;
 
 class AdminCreateController extends Controller
 {
-
-
-    protected $mailerService;
-
-    public function __construct(PHPMailerService $mailerService)
-    {
-        $this->mailerService = $mailerService;
-    }
 
 
     public function createAdmin(Request $request)
@@ -66,11 +58,14 @@ class AdminCreateController extends Controller
             $account->profile = 'profiles/' . $fileName;
         }
 
-        $sent = $this->mailerService->sendAccountCredentials($account->email, $account->username, $request->password, $account->name, 'admin');
-
-        if (!$sent) {
-            return redirect()->back()->with('error', 'Failed to send account credentials via email.');
+        try {
+            $account->notify(
+                new AccountCreatedNotification($request->password, 'admin', $account->username)
+            );
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', "Failed to send notification: " . $e->getMessage());
         }
+
 
         // Save the new admin account to the database
         $account->save();
@@ -175,10 +170,12 @@ class AdminCreateController extends Controller
         ]);
 
 
-        $sent = $this->mailerService->sendAccountCredentials($account->email, $account->username, $request->password, $account->name, 'student');
-
-        if (!$sent) {
-            return redirect()->back()->with('error', 'Failed to send account credentials via email.');
+        try {
+            $account->notify(
+                new AccountCreatedNotification($request->password, 'student', $account->username)
+            );
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', "Failed to send notification: " . $e->getMessage());
         }
 
         return redirect()->back()->with('success', 'Account added successfully!');
@@ -233,10 +230,12 @@ class AdminCreateController extends Controller
             'description' => 'ID Number: ' . $account->id_number . ', Name: ' . $account->name,
         ]);
 
-        $sent = $this->mailerService->sendAccountCredentials($account->email, $account->username, $request->password, $account->name, 'teacher');
-
-        if (!$sent) {
-            return redirect()->back()->with('error', 'Failed to send account credentials via email.');
+        try {
+            $account->notify(
+                new AccountCreatedNotification($request->password, 'teacher', $account->username)
+            );
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', "Failed to send notification: " . $e->getMessage());
         }
 
         return redirect()->back()->with('success', 'Account added successfully!');
@@ -289,10 +288,13 @@ class AdminCreateController extends Controller
             'description' => 'ID Number: ' . $account->id_number . ', Name: ' . $account->name,
         ]);
 
-        $sent = $this->mailerService->sendAccountCredentials($account->email, $account->username, $request->password, $account->name, 'guidance');
 
-        if (!$sent) {
-            return redirect()->back()->with('error', 'Failed to send account credentials via email.');
+        try {
+            $account->notify(
+                new AccountCreatedNotification($request->password, 'guidance', $account->username)
+            );
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', "Failed to send notification: " . $e->getMessage());
         }
 
         return redirect()->back()->with('success', 'Account added successfully!');

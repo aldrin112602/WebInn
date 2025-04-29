@@ -6,17 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Rules\ValidFullName;
 use Illuminate\{Http\Request, Support\Facades\Auth};
 use App\Models\{StudentHandle, Student\StudentAccount, History, StudentImage, TeacherGradeHandle};
-use App\Services\PHPMailerService;
-
+use App\Notifications\AccountCreatedNotification;
 
 class Account extends Controller
 {
-    protected $mailerService;
-
-    public function __construct(PHPMailerService $mailerService)
-    {
-        $this->mailerService = $mailerService;
-    }
 
     public function deleteStudentAccount(Request $request)
     {
@@ -175,10 +168,12 @@ class Account extends Controller
             'grade_handle_id' => $grade_handle->id
         ]);
 
-        $sent = $this->mailerService->sendAccountCredentials($account->email, $account->username, $request->password, $account->name, 'student');
-
-        if (!$sent) {
-            return redirect()->back()->with('error', 'Failed to send account credentials via email.');
+        try {
+            $account->notify(
+                new AccountCreatedNotification($request->password, 'student', $account->username)
+            );
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', "Failed to send notification: " . $e->getMessage());
         }
 
         return redirect()

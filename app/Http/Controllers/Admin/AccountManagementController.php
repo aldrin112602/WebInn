@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Rules\ValidFullName;
-
+use App\Notifications\PasswordUpdatedNotification;
 
 use Illuminate\{
     Http\Request,
@@ -426,11 +426,13 @@ class AccountManagementController extends Controller
 
 
             if (isset($request->new_password)) {
-                $sent = $this->mailerService->sendUpdatedPassword($user->email, $request->new_password, $user->username, $user->name, 'student');
-
-                if (!$sent) {
-                    return redirect()->back()->with('error', 'Failed to send account credentials via email.');
+                
+                try {
+                    $user->notify(new PasswordUpdatedNotification($request->new_password, $user->username, $user->name, 'student'));
+                } catch (\Exception $e) {
+                    return redirect()->back()->with('error', "Failed to send notification: " . $e->getMessage());
                 }
+
             }
 
             // Redirect with success message
@@ -543,10 +545,10 @@ class AccountManagementController extends Controller
 
 
             if (isset($request->new_password)) {
-                $sent = $this->mailerService->sendUpdatedPassword($user->email, $request->new_password, $user->username, $user->name, 'teacher');
-
-                if (!$sent) {
-                    return redirect()->back()->with('error', 'Failed to send account credentials via email.');
+                try {
+                    $user->notify(new PasswordUpdatedNotification($request->new_password, $user->username, $user->name, 'teacher'));
+                } catch (\Exception $e) {
+                    return redirect()->back()->with('error', "Failed to send notification: " . $e->getMessage());
                 }
             }
 
@@ -674,10 +676,10 @@ class AccountManagementController extends Controller
             ]);
 
             if (isset($request->new_password)) {
-                $sent = $this->mailerService->sendUpdatedPassword($user->email, $request->new_password, $user->username, $user->name, 'guidance');
-
-                if (!$sent) {
-                    return redirect()->back()->with('error', 'Failed to send account credentials via email.');
+                try {
+                    $user->notify(new PasswordUpdatedNotification($request->new_password, $user->username, $user->name, 'guidance'));
+                } catch (\Exception $e) {
+                    return redirect()->back()->with('error', "Failed to send notification: " . $e->getMessage());
                 }
             }
 
@@ -809,10 +811,10 @@ class AccountManagementController extends Controller
 
 
 
-            $sent = $this->mailerService->sendUpdatedPassword($user->email, $request->new_password, $user->username, $user->name, 'admin');
-
-            if (!$sent) {
-                return redirect()->back()->with('error', 'Failed to send account credentials via email.');
+            try {
+                $user->notify(new PasswordUpdatedNotification($request->new_password, $user->username, $user->name, 'admin'));
+            } catch (\Exception $e) {
+                return redirect()->back()->with('error', "Failed to send notification: " . $e->getMessage());
             }
 
             return redirect()->route('admin.admin_list')->with('success', 'Admin updated successfully');

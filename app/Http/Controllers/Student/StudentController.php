@@ -10,7 +10,7 @@ use App\Rules\ValidFullName;
 use Illuminate\Support\Facades\{Hash, Auth, Storage, Session};
 use Illuminate\Support\Facades\Http;
 use App\Services\PHPMailerService;
-
+use App\Notifications\TwoFactorAuthNotification;
 
 class StudentController extends Controller
 {
@@ -86,42 +86,40 @@ class StudentController extends Controller
 
         // Generate new OTP
         $otp = random_int(100000, 999999);
-        $email = $user->email;
-
-        $isSuccess = $this->mailerService->send2FA($email, $otp);
-
-        if ($isSuccess) {
-            // Update session with new OTP and expiry
-            Session::put('otp', $otp);
-            Session::put('otp_expiry', now()->addMinutes(10));
-
-            return redirect()->route('student.2fa.index')->with('success', 'New OTP has been sent to your email.');
+        try {
+            $user->notify(new TwoFactorAuthNotification($otp));
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Failed to send new OTP. Please try again.');
         }
 
-        return redirect()->back()->with('error', 'Failed to send new OTP. Please try again.');
+        Session::put('otp', $otp);
+        Session::put('otp_expiry', now()->addMinutes(10));
+
+        return redirect()->route('student.2fa.index')->with('success', 'New OTP has been sent to your email.');
     }
 
-    
-public function handleLogin(Request $request)
-{
-    // Validate the input
-    $request->validate([
-        'username' => 'required|string',
-        'password' => 'required|string',
-    ]);
 
-    // Retrieve the user by username
-    $user = Auth::guard('student')->getProvider()->retrieveByCredentials($request->only('username'));
+    public function handleLogin(Request $request)
+    {
+        // Validate the input
+        $request->validate([
+            'username' => 'required|string',
+            'password' => 'required|string',
+        ]);
 
-    // Check if the user exists and if the password is correct
-    if ($user && Hash::check($request->password, $user->password)) {
-        // Generate OTP
-        $otp = random_int(100000, 999999);
-        $email = $user->email;
+        // Retrieve the user by username
+        $user = Auth::guard('student')->getProvider()->retrieveByCredentials($request->only('username'));
 
-        $isSuccess = $this->mailerService->send2FA($email, $otp);
+        // Check if the user exists and if the password is correct
+        if ($user && Hash::check($request->password, $user->password)) {
+            // Generate OTP
+            $otp = random_int(100000, 999999);
+            try {
+                $user->notify(new TwoFactorAuthNotification($otp));
+            } catch (\Exception $e) {
+                return redirect()->back()->with('error', 'Failed to send new OTP. Please try again.');
+            }
 
-        if ($isSuccess) {
             // Store user and OTP data in session
             Session::put('otp', $otp);
             Session::put('otp_expiry', now()->addMinutes(10));
@@ -131,18 +129,11 @@ public function handleLogin(Request $request)
             return redirect()->route('student.2fa.index');
         }
 
-        // Handle case if OTP sending fails
-        return redirect()->back()->with(
-            'error',
-            'Failed to send OTP. Please try again.',
-        );
+        // Authentication failed
+        return redirect()->back()->withErrors([
+            'password' => 'Invalid username or password.',
+        ])->withInput($request->except('password'));
     }
-
-    // Authentication failed
-    return redirect()->back()->withErrors([
-        'password' => 'Invalid username or password.',
-    ])->withInput($request->except('password'));
-}
 
 
     public function dashboard()
@@ -259,34 +250,32 @@ public function handleLogin(Request $request)
             $request->validate([
                 'profile_photo' => 'required|image|max:2048',
             ]);
-    
+
             if ($request->hasFile('profile_photo')) {
                 // Define the target directory in the public path
                 $destinationPath = public_path('storage/profiles');
                 $file = $request->file('profile_photo');
                 $fileName = time() . '_' . $file->getClientOriginalName();
-    
+
                 // Check if the directory exists, if not, create it
                 if (!file_exists($destinationPath)) {
                     mkdir($destinationPath, 0777, true);
                 }
-    
+
                 // Check if the user has an existing profile photo and delete it
                 if ($user->profile && file_exists(public_path($user->profile))) {
                     unlink(public_path($user->profile));
                 }
-    
+
                 // Move the uploaded file to the target directory
                 $file->move($destinationPath, $fileName);
-    
+
                 // Save the file path without extra 'storage/' prefix in the database
                 $user->profile = 'profiles/' . $fileName;
                 $user->save();
-    
+
                 return redirect()->back()->with('success', 'Profile photo updated successfully!');
             }
-
-            
         }
 
         return redirect()->back()->withErrors(['error' => 'Failed to update profile photo.']);
