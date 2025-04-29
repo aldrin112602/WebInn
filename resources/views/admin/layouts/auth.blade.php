@@ -134,7 +134,7 @@
 
         <script>
             $(document).ready(function() {
-                const hasAgreedToTerms = localStorage.getItem('termsAgreed') === 'true';
+                const hasAgreedToTerms = localStorage.getItem('termsAgreedAdmin') === 'true';
 
                 if (hasAgreedToTerms) {
                     $('#agreeTerms').prop('checked', true);
@@ -152,11 +152,11 @@
 
                 $('#agreeTerms').on('change', function() {
                     if ($(this).is(':checked')) {
-                        localStorage.setItem('termsAgreed', 'true');
+                        localStorage.setItem('termsAgreedAdmin', 'true');
                         $('#loginButton').removeClass('btn-disabled').addClass('btn-enabled').removeAttr(
                             'disabled');
                     } else {
-                        localStorage.removeItem('termsAgreed');
+                        localStorage.removeItem('termsAgreedAdmin');
                         $('#loginButton').removeClass('btn-enabled').addClass('btn-disabled').attr('disabled',
                             'disabled');
                     }
