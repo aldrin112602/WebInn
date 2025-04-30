@@ -44,7 +44,7 @@
                     <th class="py-3 px-6 text-left">Subject</th>
                     <th class="py-3 px-6 text-left">Teacher</th>
                     <th class="py-3 px-6 text-left">Class time</th>
-                    <th class="py-3 px-6 text-center">Action</th>
+                    {{-- <th class="py-3 px-6 text-center">Action</th> --}}
                 </tr>
             </thead>
             <tbody class="text-gray-600 text-sm font-light">
@@ -65,11 +65,11 @@
                     <td class="py-3 px-6 text-left">
                         {{ $history->subjectDetails->time ?? 'N/A' }}
                     </td>
-                    <td class="py-3 px-6 text-center">
+                    {{-- <td class="py-3 px-6 text-center">
                         <a href="{{ route('teacher.view_class_history', $history->subjectDetails->id ?? 1) }}" class="bg-blue-500 text-white py-1 px-3 rounded-full text-xs">
                             <i class="fas fa-eye"></i> View
                         </a>
-                    </td>
+                    </td> --}}
                 </tr>
                 @endforeach
             </tbody>

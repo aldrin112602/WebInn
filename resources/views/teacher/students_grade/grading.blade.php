@@ -225,7 +225,7 @@
                 @for ($i = 1; $i <= 10; $i++)
                     <!-- Min: 5, highest: 10 -->
                     <td data-id_task="{{ $i }}" id="performance_task_highest_possible_score" data-cell-number="{{ $i }}"
-                        class="border p-1 cursor-pointer">
+                        class="border p-1 cursor-pointer" contenteditable="true">
                         {{ $highestPossibleScores['highest_possible_task_' . $i] ?? '' }}
                     </td>
                 @endfor
@@ -240,8 +240,7 @@
                     {{ $quarterlyAssessmentScore['quarterly_assessment_total'] ?? '100' }}
                 </td>
                 <td class="border p-2" contenteditable="true">100.00</td>
-                <td class="border p-2 id=" highest_possible_quart">
-                    {{ $percentage_filters[$subj->subject_track ?? '']['quarterly_assessment'] ?? '25%' }}</td>
+                <td class="border p-2" id="highest_possible_quart">{{ $percentage_filters[$subj->subject_track ?? '']['quarterly_assessment'] ?? '25%' }}</td>
                 <td class="border p-2"></td>
                 <td class="border p-2"></td>
             </tr>
@@ -443,7 +442,7 @@
                 return dec;
             };
 
-            console.log(percentToDecimal('25%'))
+            
             var t = new URLSearchParams(location.search);
             $('[data-for="written_work"], [data-for="performance_task"]').on("input", function () {
                 var t = $(this).data("cell"),
