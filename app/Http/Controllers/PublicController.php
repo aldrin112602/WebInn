@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\{Http\Request, Support\Carbon};
 use App\Models\{Admin\AdminAccount, FaceScan};
 use App\Rules\ValidFullName;
-
+use App\Notifications\TimeInOutNotification;
+use Illuminate\Support\Facades\Notification;
+use App\Models\Student\StudentAccount;
 
 class PublicController extends Controller
 {
@@ -15,6 +17,12 @@ class PublicController extends Controller
             'student_id' => 'required|exists:student_accounts,id',
             'is_time_in' => 'required|string',
         ]);
+
+
+        $student = StudentAccount::find($request->student_id)->first();
+        $parents_email = $student->parents_email;
+
+        // send notif to parents for time in and time out with time and date then if time in or time out
 
         $today = Carbon::today();
         $currentTime = Carbon::now()->format('H:i:s');
@@ -33,12 +41,21 @@ class PublicController extends Controller
                 ]);
             }
 
-            // Create a new time-in record
             FaceScan::create([
                 'student_id' => $request->student_id,
                 'time' => $currentTime,
                 'is_time_in' => true,
             ]);
+            
+            Notification::route('mail', $parents_email)->notify(
+                new TimeInOutNotification(
+                    $student->name,
+                    'Time-In',
+                    $currentTime,
+                    $today->toFormattedDateString()
+                )
+            );
+            
 
             return response()->json([
                 'success' => true,
@@ -63,6 +80,16 @@ class PublicController extends Controller
 
             // Update the time-out for the existing record
             $attendance->update(['time_out' => $currentTime]);
+
+
+            Notification::route('mail', $parents_email)->notify(
+                new TimeInOutNotification(
+                    $student->name,
+                    'Time-Out',
+                    $currentTime,
+                    $today->toFormattedDateString()
+                )
+            );
 
             return response()->json([
                 'success' => true,
