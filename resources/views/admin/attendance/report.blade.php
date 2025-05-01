@@ -4,11 +4,11 @@
 @section('content')
 <div>
     <div class="container mx-auto p-4 bg-white">
-        <div class="flex items-center justify-start gap-2">
-            <a href="{{ route('admin.attendance.report') }}" class="px-4 py-2 {{ request()->is('admin/attendance/report') ? 'bg-blue-50 text-blue-500' : 'hover:bg-blue-50 hover:text-blue-500 text-gray-700' }} rounded-md flex items-center justify-center gap-3">Report</a>
-            <a href="{{ route('admin.attendance.present') }}?status=present" class="px-4 py-2 {{ request()->is('admin/attendance/present') ? 'bg-blue-50 text-blue-500' : 'hover:bg-blue-50 hover:text-blue-500 text-gray-700' }} rounded-md flex items-center justify-center gap-3">Present</a>
-            <a href="{{ route('admin.attendance.absent') }}?status=absent" class="px-4 py-2 {{ request()->is('admin/attendance/absent') ? 'bg-blue-50 text-blue-500' : 'hover:bg-blue-50 hover:text-blue-500 text-gray-700' }} rounded-md flex items-center justify-center gap-3">Absent</a>
-        </div>
+        <!--<div class="flex items-center justify-start gap-2">-->
+        <!--    <a href="{{ route('admin.attendance.report') }}" class="px-4 py-2 {{ request()->is('admin/attendance/report') ? 'bg-blue-50 text-blue-500' : 'hover:bg-blue-50 hover:text-blue-500 text-gray-700' }} rounded-md flex items-center justify-center gap-3">Report</a>-->
+        <!--    <a href="{{ route('admin.attendance.present') }}?status=present" class="px-4 py-2 {{ request()->is('admin/attendance/present') ? 'bg-blue-50 text-blue-500' : 'hover:bg-blue-50 hover:text-blue-500 text-gray-700' }} rounded-md flex items-center justify-center gap-3">Present</a>-->
+        <!--    <a href="{{ route('admin.attendance.absent') }}?status=absent" class="px-4 py-2 {{ request()->is('admin/attendance/absent') ? 'bg-blue-50 text-blue-500' : 'hover:bg-blue-50 hover:text-blue-500 text-gray-700' }} rounded-md flex items-center justify-center gap-3">Absent</a>-->
+        <!--</div>-->
         <!-- Search and Filters -->
         <hr class="my-3">
         <div class="block md:flex flex-col md:flex-row justify-between items-center mb-4 space-y-2 md:space-y-0 md:space-x-4">

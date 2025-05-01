@@ -4,11 +4,11 @@
 @section('content')
 <div>
     <div class="container mx-auto p-4 bg-white">
-        <div class="flex items-center justify-start gap-2">
-            <a href="{{ route('teacher.attendance.report') }}" class="px-4 py-2 {{ request()->is('teacher/attendance/report') ? 'bg-blue-50 text-blue-500' : 'hover:bg-blue-50 hover:text-blue-500 text-gray-700' }} rounded-md flex items-center justify-center gap-3">Report</a>
-            <a href="{{ route('teacher.attendance.present') }}" class="px-4 py-2 {{ request()->is('teacher/attendance/present') ? 'bg-blue-50 text-blue-500' : 'hover:bg-blue-50 hover:text-blue-500 text-gray-700' }} rounded-md flex items-center justify-center gap-3">Present</a>
-            <a href="{{ route('teacher.attendance.absent') }}" class="px-4 py-2 {{ request()->is('teacher/attendance/absent') ? 'bg-blue-50 text-blue-500' : 'hover:bg-blue-50 hover:text-blue-500 text-gray-700' }} rounded-md flex items-center justify-center gap-3">Absent</a>
-        </div>
+        <!--<div class="flex items-center justify-start gap-2">-->
+            <!--<a href="{{ route('teacher.attendance.report') }}" class="px-4 py-2 {{ request()->is('teacher/attendance/report') ? 'bg-blue-50 text-blue-500' : 'hover:bg-blue-50 hover:text-blue-500 text-gray-700' }} rounded-md flex items-center justify-center gap-3">Report</a>-->
+            <!--<a href="{{ route('teacher.attendance.present') }}" class="px-4 py-2 {{ request()->is('teacher/attendance/present') ? 'bg-blue-50 text-blue-500' : 'hover:bg-blue-50 hover:text-blue-500 text-gray-700' }} rounded-md flex items-center justify-center gap-3">Present</a>-->
+            <!--<a href="{{ route('teacher.attendance.absent') }}" class="px-4 py-2 {{ request()->is('teacher/attendance/absent') ? 'bg-blue-50 text-blue-500' : 'hover:bg-blue-50 hover:text-blue-500 text-gray-700' }} rounded-md flex items-center justify-center gap-3">Absent</a>-->
+        <!--</div>-->
         <!-- Search and Filters -->
         <hr class="my-3">
         <div class="block md:flex flex-col md:flex-row justify-between items-center mb-4 space-y-2 md:space-y-0 md:space-x-4">
@@ -49,7 +49,7 @@
         <hr class="my-3">
 
         <div class="flex items-center justify-between">
-            <h1 class="font-semibold text-slate-600">REPORT</h1>
+            <h1 class="font-semibold text-slate-600">ATTENDANCE REPORT</h1>
             <!-- <div class="flex gap-2">
                 {{-- <button id="deleteSelected" class="px-4 py-2 bg-rose-700 text-white rounded-md flex items-center justify-center gap-3">
                     <i class="fa-solid fa-trash"></i>

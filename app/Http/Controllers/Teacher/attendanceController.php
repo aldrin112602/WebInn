@@ -55,18 +55,20 @@ class attendanceController extends Controller
     public function viewAttendanceHistory(Request $request, $id)
     {
         $user = Auth::guard('teacher')->user();
-        $attendace_histories_query = AttendanceHistory::query();
+        $attendace_histories = AttendanceHistory::where('student_id', $id)->get();
         $handleSubjects = TeacherGradeHandle::where('teacher_id', $user->id)->get();
 
         // Apply status filter
-        if ($request->has('status') && in_array($request->status, ['absent', 'present'])) {
-            $attendace_histories_query->where('status', $request->status);
-        }
+        // if ($request->has('status') && in_array($request->status, ['absent', 'present'])) {
+        //     $attendace_histories_query->where('status', $request->status);
+        // }
+        
+        
 
 
         return view('teacher.attendance.view_attendance_history', [
             'user' => $user,
-            'attendace_histories' => $attendace_histories_query->get(),
+            'attendace_histories' => $attendace_histories,
             'TeacherGradeHandle' => TeacherGradeHandle::class,
             'SubjectModel' => SubjectModel::class,
             'TeacherAccount' => TeacherAccount::class,

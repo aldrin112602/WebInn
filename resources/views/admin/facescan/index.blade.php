@@ -58,9 +58,9 @@
         </div>
 
         <hr class="my-3">
-        @if ($account_list->count())
+        @if ($attendance_list->count())
         <p class="text-sm text-slate-500 mb-3">
-            Showing {{ $account_list->firstItem() }} - {{ $account_list->lastItem() }} of {{ $account_list->total() }} students
+            Showing {{ $attendance_list->firstItem() }} - {{ $attendance_list->lastItem() }} of {{ $attendance_list->total() }} students
         </p>
 
         <!-- Student List Table -->
@@ -83,7 +83,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($account_list as $list)
+                    @foreach($attendance_list as $list)
                     <tr>
                         {{-- <td class="py-2 text-center border">
                             <input type="checkbox" class="selectRow highlight-checkbox" data-id="{{ $list->id }}">
@@ -102,7 +102,7 @@
         </div>
         <!-- Display pagination links -->
         <div class="w-full mb-4 mt-4">
-            {{ $account_list->appends(request()->query())->links() }}
+            {{ $attendance_list->appends(request()->query())->links() }}
         </div>
         @else
         <p>No records found.</p>

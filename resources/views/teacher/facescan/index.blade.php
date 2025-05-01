@@ -47,9 +47,9 @@
                 <button onclick="window.print()" class="px-4 py-2 bg-slate-500 text-white rounded-md flex items-center justify-center gap-3">
                     <i class="fa-solid fa-print"></i>
                     Print</button>
-                <a href="#!" class="px-4 py-2 bg-slate-500 text-white rounded-md flex items-center justify-center gap-3">
-                    <i class="fa-solid fa-file-export"></i>
-                    Export</a>
+                <!--<a href="#!" class="px-4 py-2 bg-slate-500 text-white rounded-md flex items-center justify-center gap-3">-->
+                <!--    <i class="fa-solid fa-file-export"></i>-->
+                <!--    Export</a>-->
             </div>
         </div>
 
@@ -62,7 +62,7 @@
         <!-- Student List Table -->
         <div class="overflow-x-auto" id="tablePreview2">
             <h1 class="font-semibold text-slate-600 hidden">FACE SCAN ATTENDANCE</h1>
-            <table class="min-w-full bg-white border border-gray-200">
+            <table class="min-w-full bg-white border border-gray-200" id="tbl_list">
                 <thead class="bg-gray-100">
                     <tr>
                         <th class="py-3 px-2 text-center border">ID No.</th>
@@ -78,7 +78,7 @@
                 </thead>
                 <tbody>
                     @foreach($faceScans as $list)
-                    <tr>
+                    <tr class="tbl_tr">
 
                         <td class="py-2 text-center border">{{ $StudentAccount::where('id', $list->student_id)->first()->id_number }}</td>
                         <td class="py-2 text-center border">{{ $StudentAccount::where('id', $list->student_id)->first()->username }}</td>

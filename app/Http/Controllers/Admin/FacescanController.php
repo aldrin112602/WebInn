@@ -11,37 +11,57 @@ use Carbon\Carbon;
 
 class FaceScanController extends Controller
 {
-    public function index(Request $request) {
-        $user = Auth::user();
-        $faceScans = FaceScan::select('student_id', 'time', 'created_at')->get();
-        $face_scanned_student_ids = $faceScans->pluck('student_id');
-        $query = StudentAccount::whereIn('id', $face_scanned_student_ids);
-        if ($request->has('gender') && $request->gender != '' && $request->gender != 'All') {
-            $query->where('gender', $request->gender);
-        }
-        if ($request->has('strand') && $request->strand != '' && $request->strand != 'All') {
-            $query->where('strand', $request->strand);
-        }
-        if ($request->has('grade') && $request->grade != '' && $request->grade != 'All') {
-            $query->where('grade', $request->grade);
-        }
-        $account_list = $query->paginate(10);
-        $account_list->map(function($student) use ($faceScans) {
-            $scan = $faceScans->firstWhere('student_id', $student->id);
-            if ($scan) {
-                $student->time_in = Carbon::parse($scan->time)->format('h:i A');
-                $student->scan_created_at = Carbon::parse($scan->created_at)->format('Y-m-d h:i A');
-            } else {
-                $student->time_in = null;
-                $student->scan_created_at = null;
-            }
-            return $student;
-        });
-
-        // Return the view with relevant data
-        return view('admin.facescan.index', [
-            'user' => $user,
-            'account_list' => $account_list,
-        ]);
+   public function index(Request $request) {
+    $user = Auth::user();
+    
+    // Start with a base query for face scans
+    $query = FaceScan::query();
+    
+    // Apply any date filters if needed (you can add this)
+    if ($request->has('date') && $request->date != '') {
+        $query->whereDate('created_at', $request->date);
     }
+    
+    // Get all the face scans with their related student information using a join
+    $attendanceRecords = $query->join('student_accounts', 'face_scans.student_id', '=', 'student_accounts.id')
+        ->select(
+            'face_scans.*', 
+            'student_accounts.id_number',
+            'student_accounts.username',
+            'student_accounts.name',
+            'student_accounts.grade',
+            'student_accounts.strand',
+            'student_accounts.gender'
+        );
+    
+    // Apply filters to the joined query
+    if ($request->has('gender') && $request->gender != '' && $request->gender != 'All') {
+        $attendanceRecords->where('student_accounts.gender', $request->gender);
+    }
+    
+    if ($request->has('strand') && $request->strand != '' && $request->strand != 'All') {
+        $attendanceRecords->where('student_accounts.strand', $request->strand);
+    }
+    
+    if ($request->has('grade') && $request->grade != '' && $request->grade != 'All') {
+        $attendanceRecords->where('student_accounts.grade', $request->grade);
+    }
+    
+    // Paginate the results
+    $attendanceList = $attendanceRecords->orderBy('face_scans.created_at', 'desc')->paginate(10);
+    
+    // Format the time for display
+    $attendanceList->map(function($record) {
+        $record->time_in = Carbon::parse($record->time)->format('h:i A');
+        $record->scan_date = Carbon::parse($record->created_at)->format('Y-m-d');
+        $record->scan_created_at = Carbon::parse($record->created_at)->format('Y-m-d h:i A');
+        return $record;
+    });
+    
+    // Return the view with relevant data
+    return view('admin.facescan.index', [
+        'user' => $user,
+        'attendance_list' => $attendanceList,
+    ]);
+}
 }
