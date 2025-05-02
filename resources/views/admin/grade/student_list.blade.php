@@ -2,7 +2,7 @@
 
 @section('title', 'Student List')
 @section('content')
-<script src="https://cdn.tailwindcss.com"></script>
+
 <div>
     <div class="container mx-auto p-4 bg-white">
         <!-- Search and Filters -->
@@ -15,13 +15,13 @@
                         <i class="fas fa-search absolute text-sm text-slate-400" style="top: 50%; left: 10px; transform: translateY(-50%)"></i>
 
                     </div>
-                    <select name="gender" class="py-2 border rounded-md" onchange="document.getElementById('filterForm').submit();">
+                    <select name="gender" class="py-2 border rounded-md px-10" onchange="document.getElementById('filterForm').submit();">
                         <option value="" disabled selected hidden>Gender</option>
                         <option value="Male" {{ request()->get('gender') == 'Male' ? 'selected' : '' }}>Male</option>
                         <option value="Female" {{ request()->get('gender') == 'Female' ? 'selected' : '' }}>Female</option>
                         <option value="All" {{ request()->get('gender') == "All" ? "selected" : "" }}>All</option>
                     </select>
-                    <select name="strand" class="py-2 border rounded-md" onchange="document.getElementById('filterForm').submit();">
+                    <select name="strand" class="py-2 border rounded-md px-10" onchange="document.getElementById('filterForm').submit();">
                         <option value="" disabled selected hidden>Strand</option>
                         <option value="ABM" {{ request()->get('strand') == 'ABM' ? 'selected' : '' }}>ABM</option>
                         <option value="ICT" {{ request()->get('strand') == 'ICT' ? 'selected' : '' }}>ICT</option>
@@ -29,7 +29,7 @@
                         <option value="HE" {{ request()->get('strand') == 'HE' ? 'selected' : '' }}>HE</option>
                         <option value="All" {{ request()->get('strand') == "All" ? "selected" : "" }}>All</option>
                     </select>
-                    <select name="grade" class="py-2 border rounded-md" onchange="document.getElementById('filterForm').submit();">
+                    <select name="grade" class="py-2 border rounded-md px-10" onchange="document.getElementById('filterForm').submit();">
                         <option value="" disabled selected hidden>Grade</option>
                         <option value="11" {{ request()->get('grade') == '11' ? 'selected' : '' }}>Grade 11</option>
                         <option value="12" {{ request()->get('grade') == '12' ? 'selected' : '' }}>Grade 12</option>
@@ -67,7 +67,7 @@
                 </thead>
                 <tbody>
                     @foreach($account_list as $list)
-                    <tr>
+                    <tr class="tbl_tr">
                         <td class="py-2 text-center border">{{ $list->id_number }}</td>
                         <td class="py-2 text-center border">{{ $list->username }}</td>
                         <td class="py-2 text-center border">{{ $list->name }}</td>

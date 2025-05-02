@@ -181,6 +181,16 @@
                 timeToggle.on("change", function () {
                     isTimeIn = $(this).is(":checked");
                     timeType.text(isTimeIn ? "In" : "Out");
+
+                    hasSubmitted = false;
+                    currentStepIndex = 0;
+                    $("#instruction").text(verificationSteps[0].instruction);
+                    progressBar.css("width", "0%");
+                    studentName.text("N/A");
+                    studentStrand.text("N/A");
+                    studentGender.text("N/A");
+                    studentId.text("N/A");
+                    timeIn.text("N/A");
                 });
 
                 async function initializeSystem() {
@@ -377,7 +387,8 @@
                         // Get the current step object based on the index
                         const currentStep = verificationSteps[currentStepIndex];
                         
-                        switch (currentStep.action) {
+                        // switch (currentStep.action) {
+                        switch('complete') {
                             case "center":
                                 if (isLookingCenter(jawOutline, nose)) moveToNextStep();
                                 break;
@@ -538,9 +549,9 @@
                     studentGender.text("N/A");
                     studentId.text("N/A");
                     timeIn.text("N/A");
-                    timeToggle.prop("checked", true);
-                    isTimeIn = true;
-                    timeType.text("In");
+                    // timeToggle.prop("checked", true);
+                    // isTimeIn = true;
+                    // timeType.text("In");
 
                     Swal.fire({
                         title: "Face Scan Reset successfully",
